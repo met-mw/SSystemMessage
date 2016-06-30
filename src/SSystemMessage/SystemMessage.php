@@ -8,7 +8,7 @@ use InvalidArgumentException;
  * Class SystemMessage
  * @package SSystemMessage
  */
-class SystemMessage implements SystemMessageInterface
+class SystemMessage extends SystemMessageAbstract
 {
 
     /** @var $this */
@@ -191,6 +191,78 @@ class SystemMessage implements SystemMessageInterface
     public function getWarning()
     {
         return $this->warning;
+    }
+
+    /**
+     * Set danger messages
+     *
+     * @param String[] $messages
+     * @return $this
+     */
+    public function setDanger(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Danger messages array must contains a strings.');
+            }
+        });
+
+        $this->danger = $messages;
+        return $this;
+    }
+
+    /**
+     * Set information messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setInfo(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Information messages array must contains a strings.');
+            }
+        });
+
+        $this->info = $messages;
+        return $this;
+    }
+
+    /**
+     * Set success messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setSuccess(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Success messages array must contains a strings.');
+            }
+        });
+
+        $this->success = $messages;
+        return $this;
+    }
+
+    /**
+     * Set warning messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setWarning(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Warning messages array must contains a strings.');
+            }
+        });
+
+        $this->warning = $messages;
+        return $this;
     }
 
 }

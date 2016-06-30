@@ -8,7 +8,7 @@ use InvalidArgumentException;
  * Class SystemMessageSession
  * @package SSystemMessage
  */
-class SystemMessageSession implements SystemMessageInterface
+class SystemMessageSession extends SystemMessageAbstract
 {
 
     /** @var $this */
@@ -28,7 +28,9 @@ class SystemMessageSession implements SystemMessageInterface
         return static::$instance;
     }
 
-    private function __construct() {}
+    private function __construct() {
+        session_start();
+    }
 
     /**
      * Add danger message
@@ -42,7 +44,6 @@ class SystemMessageSession implements SystemMessageInterface
             throw new InvalidArgumentException('Danger text must be a string.');
         }
 
-        session_start();
         $_SESSION['ssystemmessage_session']['danger'][] = $text;
 
         return $this;
@@ -60,7 +61,6 @@ class SystemMessageSession implements SystemMessageInterface
             throw new InvalidArgumentException('Info text must be a string.');
         }
 
-        session_start();
         $_SESSION['ssystemmessage_session']['info'][] = $text;
 
         return $this;
@@ -78,7 +78,6 @@ class SystemMessageSession implements SystemMessageInterface
             throw new InvalidArgumentException('Success text must be a string.');
         }
 
-        session_start();
         $_SESSION['ssystemmessage_session']['success'][] = $text;
 
         return $this;
@@ -96,7 +95,6 @@ class SystemMessageSession implements SystemMessageInterface
             throw new InvalidArgumentException('Warning text must be a string.');
         }
 
-        session_start();
         $_SESSION['ssystemmessage_session']['warning'][] = $text;
 
         return $this;
@@ -109,7 +107,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function hasDanger()
     {
-        session_start();
         return isset($_SESSION['ssystemmessage_session'])
             && isset($_SESSION['ssystemmessage_session']['danger'])
             && !empty($_SESSION['ssystemmessage_session']['danger']);
@@ -122,7 +119,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function hasInfo()
     {
-        session_start();
         return isset($_SESSION['ssystemmessage_session'])
             && isset($_SESSION['ssystemmessage_session']['info'])
             && !empty($_SESSION['ssystemmessage_session']['info']);
@@ -135,7 +131,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function hasSuccess()
     {
-        session_start();
         return isset($_SESSION['ssystemmessage_session'])
             && isset($_SESSION['ssystemmessage_session']['success'])
             && !empty($_SESSION['ssystemmessage_session']['success']);
@@ -148,7 +143,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function hasWarning()
     {
-        session_start();
         return isset($_SESSION['ssystemmessage_session'])
             && isset($_SESSION['ssystemmessage_session']['warning'])
             && !empty($_SESSION['ssystemmessage_session']['warning']);
@@ -171,7 +165,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function getDanger()
     {
-        session_start();
         return $this->hasDanger() ? $_SESSION['ssystemmessage_session']['danger'] : [];
     }
 
@@ -182,7 +175,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function getInfo()
     {
-        session_start();
         return $this->hasDanger() ? $_SESSION['ssystemmessage_session']['info'] : [];
     }
 
@@ -193,7 +185,6 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function getSuccess()
     {
-        session_start();
         return $this->hasDanger() ? $_SESSION['ssystemmessage_session']['success'] : [];
     }
 
@@ -204,8 +195,79 @@ class SystemMessageSession implements SystemMessageInterface
      */
     public function getWarning()
     {
-        session_start();
         return $this->hasDanger() ? $_SESSION['ssystemmessage_session']['warning'] : [];
+    }
+
+    /**
+     * Set danger messages
+     *
+     * @param String[] $messages
+     * @return $this
+     */
+    public function setDanger(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Danger messages array must contains a strings.');
+            }
+        });
+
+        $_SESSION['ssystemmessage_session']['danger'] = $messages;
+        return $this;
+    }
+
+    /**
+     * Set information messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setInfo(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Information messages array must contains a strings.');
+            }
+        });
+
+        $_SESSION['ssystemmessage_session']['info'] = $messages;
+        return $this;
+    }
+
+    /**
+     * Set success messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setSuccess(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Success messages array must contains a strings.');
+            }
+        });
+
+        $_SESSION['ssystemmessage_session']['success'] = $messages;
+        return $this;
+    }
+
+    /**
+     * Set warning messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setWarning(array $messages = [])
+    {
+        array_filter($messages, function($message) {
+            if (!is_string($message)) {
+                throw new InvalidArgumentException('Warning messages array must contains a strings.');
+            }
+        });
+
+        $_SESSION['ssystemmessage_session']['warning'] = $messages;
+        return $this;
     }
 
 }

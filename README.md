@@ -4,7 +4,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/met_mw/ssystemmessage/v/unstable)](https://packagist.org/packages/met_mw/ssystemmessage)
 [![Total Downloads](https://poser.pugx.org/met_mw/ssystemmessage/downloads)](https://packagist.org/packages/met_mw/ssystemmessage)
 [![License](https://poser.pugx.org/met_mw/ssystemmessage/license)](https://packagist.org/packages/met_mw/ssystemmessage)
-# SBreadcrumbs
+# SSystemMessage
 Simple system messages for web-applications.
 
 ## Install
@@ -13,8 +13,31 @@ composer require met_mw/ssystemmessage
 ```
 
 ## example
+
+### System messages
+```
+SystemMessage::i()
+    ->addDanger('Error!')
+    ->addInfo('Information.')
+    ->addSuccess('Success!')
+    ->addWarning('Warning!');
+    
+echo '<h1>System messages.</h1>';
+SystemMessage::i()->printAll();
 ```
 
+### System messages with using session.
+This method needs for send or print messages in any pages.
+```
+SystemMessageSession::i()
+    ->addDanger('Error!')
+    ->addInfo('Information.')
+    ->addSuccess('Success!')
+    ->addWarning('Warning!');
+
+
+echo '<h1>System messages with using session.</h1>';
+SystemMessageSession::i()->printAll();
 ```
 
 ## License

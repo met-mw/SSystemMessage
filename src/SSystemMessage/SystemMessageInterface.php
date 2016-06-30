@@ -45,6 +45,48 @@ interface SystemMessageInterface
     public function addWarning($text);
 
     /**
+     * Clear all messages
+     *
+     * @return $this
+     */
+    public function clear();
+
+    /**
+     * Clear danger messages
+     *
+     * @return $this
+     */
+    public function clearDanger();
+
+    /**
+     * Clear information messages
+     *
+     * @return $this
+     */
+    public function clearInfo();
+
+    /**
+     * Clear danger and warning messages
+     *
+     * @return $this
+     */
+    public function clearProblems();
+
+    /**
+     * Clear success messages
+     *
+     * @return $this
+     */
+    public function clearSuccess();
+
+    /**
+     * Clear warning messages
+     *
+     * @return $this
+     */
+    public function clearWarning();
+
+    /**
      * Check exists danger messages
      *
      * @return bool
@@ -106,5 +148,79 @@ interface SystemMessageInterface
      * @return string[]
      */
     public function getWarning();
+
+    /**
+     * Print all collected messages
+     *
+     * @return $this
+     */
+    public function printAll();
+
+    /**
+     * Print all danger messages
+     *
+     * @return $this
+     */
+    public function printDanger();
+
+    /**
+     * Print all information messages
+     *
+     * @return $this
+     */
+    public function printInfo();
+
+    /**
+     * Print all danger and warning messages
+     *
+     * @return $this
+     */
+    public function printProblems();
+
+    /**
+     * Print all success messages
+     *
+     * @return $this
+     */
+    public function printSuccess();
+
+    /**
+     * Print all warning messages
+     *
+     * @return $this
+     */
+    public function printWarning();
+
+    /**
+     * Set danger messages
+     *
+     * @param String[] $messages
+     * @return $this
+     */
+    public function setDanger(array $messages = []);
+
+    /**
+     * Set information messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setInfo(array $messages = []);
+
+    /**
+     * Set success messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setSuccess(array $messages = []);
+
+    /**
+     * Set warning messages
+     *
+     * @param string[] $messages
+     * @return $this
+     */
+    public function setWarning(array $messages = []);
 
 }
