@@ -12,7 +12,7 @@ Simple system messages for web-applications.
 composer require met_mw/ssystemmessage
 ```
 
-## example
+## Example
 
 ### System messages
 ```
