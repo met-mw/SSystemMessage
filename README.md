@@ -15,7 +15,7 @@ composer require met_mw/ssystemmessage
 ## Example
 
 ### System messages
-```
+```php
 SystemMessage::i()
     ->addDanger('Error!')
     ->addInfo('Information.')
@@ -28,9 +28,11 @@ SystemMessage::i()->printAll();
 
 ### System messages with using session.
 This method needs for send or print messages in any pages.
+
 > Attention! "SystemMessageSession::i()" or "session_start()" must be called before output started.
 > See [session_start()](http://php.net/manual/ru/function.session-start.php) documentation. 
-```
+
+```php
 SystemMessageSession::i()
     ->addDanger('Error!')
     ->addInfo('Information.')
