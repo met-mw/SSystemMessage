@@ -29,7 +29,7 @@ class SystemMessageSession extends SystemMessageAbstract
     }
 
     private function __construct() {
-        session_start();
+        @session_start();
     }
 
     /**
